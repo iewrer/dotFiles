@@ -9,7 +9,7 @@ LinkWithBak()
 
 exists()
 {
-	type -t $1 > /dev/null 2>& 1
+	type -t $1 > /dev/null 2>&1 
 }
 
 brewInstall()
@@ -83,16 +83,30 @@ ZSHRC="$HOME/.zshrc"
 ZSHNEW="./zsh/.zshrc"
 LinkZSH()
 {
-		if ! exists zsh ; then
-			$ZSH
-		fi
-		if [ -L $ZSHRC ] ; then
-			echo "zsh is already installed!"
-		else
-			mv $ZSHRC $ZSHRC.orig
-			ln -sf $ZSHNEW $ZSHRC
-			echo "$ZSHRC is successfully linked."
-		fi
+	if ! exists zsh ; then
+		read installOrNot
+		case installOrNot in
+			y | yes | Yes | YES ) 
+				echo "install zsh..."
+				$ZSH
+				;;
+			n | no | No | NO )
+				echo "won't install zsh..."
+				return 0
+				;;
+			* ) 
+				echo "wrong input,won't install zsh."
+				return 0
+				;;
+		esac
+	fi
+	if [ -L $ZSHRC ] ; then
+		echo "zsh is already installed!"
+	else
+		mv $ZSHRC $ZSHRC.orig
+		ln -sf $ZSHNEW $ZSHRC
+		echo "$ZSHRC is successfully linked."
+	fi
 }
 case $OSTYPE in
 	*darwin*)
