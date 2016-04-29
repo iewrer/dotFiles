@@ -1,0 +1,4 @@
+directory /code/src
+set args -Sf ../serverconf/adspr_pusher.conf
+set substitute-path /home/export/data/jenkins_slave/workspace/AdServing/AdServing_Build/Adserver-Debug_RHEL7/adserver/src /code/src 
+source stl-views.gdb

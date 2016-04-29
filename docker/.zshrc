@@ -1,11 +1,11 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/xmpan/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME=agnoster
+ZSH_THEME=xxf
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -49,13 +49,12 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew web-search  zsh-navigation-tools zsh-autosuggestions colored-man-pages history svn wd tmux)
+plugins=(git brew web-search  zsh-navigation-tools)
 
 # User configuration
 
-export PATH="/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export PATH=$PATH:/usr/local/go/bin
-export EDITOR='vim'
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -86,7 +85,10 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias vim="/usr/local/bin/vim"
 alias vi="vim"
+alias regression='cd /regression/regression/regression'
+alias adserver='cd /regression/regression/regression/adserver'
+alias run='/regression/regression/regression/adserver/ads -Sf /regression/regression/regression/serverconf/adspr_pusher.conf'
+alias debug='gdb -x commands --args ads "-Sf ../serverconf/adspr_pusher.conf"'
 
 source "$HOME/.sccrc" && [[ ! $PATH =~ $HOME/.local/bin ]] && export PATH=$PATH:$HOME/.local/bin
