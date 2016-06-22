@@ -44,6 +44,9 @@ NeoBundle 'https://github.com/majutsushi/tagbar.git'
 "NeoBundle 'https://github.com/kien/ctrlp.vim.git'
 NeoBundle 'https://github.com/ctrlpvim/ctrlp.vim.git'
 NeoBundle 'https://github.com/vim-scripts/ctags.vim.git'
+NeoBundle 'https://github.com/terryma/vim-multiple-cursors.git'
+NeoBundle 'https://github.com/chrisbra/NrrwRgn.git'
+NeoBundle 'mileszs/ack.vim'
 
 " My Bundles here:
 " Refer to |:NeoBundle-examples|.
@@ -72,7 +75,10 @@ syntax on
 
 set backupdir=/tmp
 set directory=/tmp
+set autoread
 
+set foldmethod=syntax
+set foldmethod=manual
 let g:neobundle#install_process_timeout = 1500
 
 " rainbow_parentheses setting
@@ -129,6 +135,14 @@ let g:airline#extensions#tabline#enabled = 1
 set backspace=2
 let g:airline#extensions#branch#enabled = 1
 let g:airline_theme = 'gruvbox'
+
+" ack.vim setting
+if executable('ag')
+	let g:ackprg = 'ag --vimgrep'
+endif
+let g:ackhighlight=1
+"let g:ack_autofold_results=1
+let g:ack_use_dispatch=1
 
 
 " neocomplete setting
