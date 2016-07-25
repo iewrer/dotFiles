@@ -1,7 +1,8 @@
 #!/bin/bash
-$DOT=/data/dotFiles
-$DOCKER=$DOT/docker
-sh ./oh_my_zsh_install.sh
+DOT=/data/dotFiles
+DOCKER=$DOT/docker
+sh ./neobundle_install.sh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 ln -sf $DOCKER/.gdbinit.global $HOME/.gdbinit
 ln -sf $DOCKER/.gdbinit.regression /regression/regression/regression/.gdbinit
 ln -sf $DOCKER/.zshrc $HOME/.zshrc
