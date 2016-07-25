@@ -1,6 +1,12 @@
 #!/bin/bash
-ln -sf .gdbinit.global ~/.gdbinit
-ln -sf .gdbinit.regression /regression/regression/regression/.gdbinit
-ln -sf .zshrc ~zshrc/.zshrc
-ln -sf commands /regression/regression/regression/adserver/commands
-source ~/.zshrc
+$DOT=/data/dotFiles
+$DOCKER=$DOT/docker
+sh ./oh_my_zsh_install.sh
+ln -sf $DOCKER/.gdbinit.global $HOME/.gdbinit
+ln -sf $DOCKER/.gdbinit.regression /regression/regression/regression/.gdbinit
+ln -sf $DOCKER/.zshrc $HOME/.zshrc
+ln -sf $DOCKER/gdbcommands /regression/regression/regression/adserver/commands
+ln -sf /code/ads/common/build/ads/server/ads /regression/regression/regression/adserver/ads
+ln -sf /code/ads/common/build/ads/server/ads /regression/regression/regression/adserver_m/ads
+ln -sf $DOT/vim/.vimrc $HOME/.vimrc
+source $HOME/.zshrc

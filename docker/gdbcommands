@@ -1,4 +1,4 @@
-set substitute-path /home/xmpan/code/ads/trunk/src /code/src
+set substitute-path /home/xmpan/code/ads/trunk/src /code/ads/common/src
 define fwid
     print ads::entity_id_to_str($arg0)
 end

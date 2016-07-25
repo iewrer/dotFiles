@@ -81,6 +81,10 @@ set foldmethod=syntax
 set foldmethod=manual
 let g:neobundle#install_process_timeout = 1500
 
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview 
+
+
 " rainbow_parentheses setting
 "let g:rbpt_colorpairs = [
     "\ ['brown',       'RoyalBlue3'],

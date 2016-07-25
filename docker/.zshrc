@@ -5,8 +5,8 @@ export ZSH=~/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME=xxf
-
+ZSH_THEME=agnoster
+setopt HIST_IGNORE_ALL_DUPS
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -49,7 +49,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew web-search  zsh-navigation-tools)
+plugins=(git web-search  zsh-navigation-tools zsh-autosuggestions colored-man-pages history svn wd )
 
 # User configuration
 
