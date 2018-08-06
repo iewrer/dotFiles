@@ -32,7 +32,7 @@ NeoBundle 'https://github.com/scrooloose/nerdcommenter.git'
 			"\ 'cygwin'  : './install.py'
 			"\ }
 			"\ }
-NeoBundle 'https://github.com/Shougo/neocomplete.vim.git'
+"NeoBundle 'https://github.com/Shougo/neocomplete.vim.git'
 NeoBundle 'https://github.com/scrooloose/nerdtree.git'
 NeoBundle 'https://github.com/edkolev/tmuxline.vim.git'
 NeoBundle 'https://github.com/vim-ctrlspace/vim-ctrlspace.git'
@@ -47,6 +47,12 @@ NeoBundle 'https://github.com/vim-scripts/ctags.vim.git'
 NeoBundle 'https://github.com/terryma/vim-multiple-cursors.git'
 NeoBundle 'https://github.com/chrisbra/NrrwRgn.git'
 NeoBundle 'mileszs/ack.vim'
+NeoBundle 'https://github.com/Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+NeoBundle 'git@git.dev.fwmrm.net:vim/deoplete-fwlqs.git'
+NeoBundle 'zchee/deoplete-clang'
+NeoBundle 'wannesm/wmgraphviz.vim'
+"NeoBundle 'https://github.com/nathanaelkane/vim-indent-guides.git'
+"NeoBundle 'Yggdroot/indentLine'
 
 " My Bundles here:
 " Refer to |:NeoBundle-examples|.
@@ -59,6 +65,10 @@ set hidden
 
 set tabstop=4
 set shiftwidth=4
+"autocmd FileType python set expandtab
+"set smartindent 
+"set cindent 
+"set autoindent 
 
 set hlsearch
 
@@ -66,6 +76,7 @@ set ruler
 set number
 set showcmd
 set nu rnu
+set smartcase
 
 filetype on
 filetype indent on
@@ -81,9 +92,8 @@ set foldmethod=syntax
 set foldmethod=manual
 let g:neobundle#install_process_timeout = 1500
 
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview 
-
+"autocmd BufWinLeave *.* mkview
+"autocmd BufWinEnter *.* silent loadview 
 
 " rainbow_parentheses setting
 "let g:rbpt_colorpairs = [
@@ -148,37 +158,57 @@ let g:ackhighlight=1
 "let g:ack_autofold_results=1
 let g:ack_use_dispatch=1
 
-
-" neocomplete setting
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-			\ 'default' : '',
-			\ 'vimshell' : $HOME.'/.vimshell_hist',
-			\ 'scheme' : $HOME.'/.gosh_completions'
-			\ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-	let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-
 " ctrlspace setting
 let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
 let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
 let g:CtrlSpaceSaveWorkspaceOnExit = 1
+let g:CtrlSpaceDefaultMappingKey = "<C-space> "
+
+" neocomplete setting
+" Use neocomplete.
+"let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+"let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+"let g:neocomplete#sources#syntax#min_keyword_length = 3
+"let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+" Define dictionary.
+"let g:neocomplete#sources#dictionary#dictionaries = {
+			"\ 'default' : '',
+			"\ 'vimshell' : $HOME.'/.vimshell_hist',
+			"\ 'scheme' : $HOME.'/.gosh_completions'
+			"\ }
+
+" Define keyword.
+"if !exists('g:neocomplete#keyword_patterns')
+	"let g:neocomplete#keyword_patterns = {}
+"endif
+"let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+ "<TAB>: completion.
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+ "<C-h>, <BS>: close popup and delete backword char.
+"inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+"inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+
+let g:python3_host_prog = '/Users/xmpan/.pyenv/versions/neovim3/bin/python'
+
+set completeopt-=preview
+let g:deoplete#enable_at_startup = 1
+		inoremap <silent><expr> <TAB>
+		\ pumvisible() ? "\<C-n>" :
+		\ <SID>check_back_space() ? "\<TAB>" :
+		\ deoplete#mappings#manual_complete()
+
+		function! s:check_back_space() abort "{{{
+			let col = col('.') - 1
+			return !col || getline('.')[col - 1]  =~ '\s'
+		endfunction"}}}
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#sources#clang#libclang_path = '/usr/local/Cellar/llvm/3.6.2/lib/libclang.dylib'
+let g:deoplete#sources#clang#clang_header = '/usr/local/Cellar/llvm/3.6.2/include/clang/'
+	inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
+	inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
+
 
 " easytags setting
 let g:easytags_auto_highlight = 0
@@ -224,3 +254,5 @@ autocmd! BufReadPost quickfix call BufferNowaitMap()
 autocmd! BufReadPost location call BufferNowaitMap()
 
 autocmd! BufWritePost ~/.vimrc source ~/.vimrc
+
+nnoremap gR gD:%s/<C-R>///gc<left><left><left>

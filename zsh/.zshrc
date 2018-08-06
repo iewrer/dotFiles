@@ -86,7 +86,14 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias vim="/usr/local/bin/vim"
+#alias vim="/usr/local/bin/vim"
+alias vim="nvim"
 alias vi="vim"
 
 source "$HOME/.sccrc" && [[ ! $PATH =~ $HOME/.local/bin ]] && export PATH=$PATH:$HOME/.local/bin
+export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/opt/openssl/bin:$PATH"
+
+export PATH="/Users/xmpan/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
